@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'halfmoon/css/halfmoon.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 import './scss/app.scss';
 
 ReactDOM.render(
