@@ -32,7 +32,6 @@ export const useFetchWeather = (params, position) => {
       cancelToken: cancelToken.token,
       params: { units: 'imperial', lat: position.latitude, lon: position.longitude, ...params, appid: process.env.REACT_APP_WEATHER_KEY }
     }).then(res => {
-      console.log(res);
       dispatch({ type: ACTIONS.GET_DATA, payload: { weather: res.data }});
     }).catch(e => {
       if (axios.isCancel(e)) return;

@@ -1,15 +1,4 @@
 import React, { useState } from 'react';
-import {
-  Collapse,
-  Container,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  NavbarText
-} from 'reactstrap';
 
 const UpperNavBar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,28 +6,22 @@ const UpperNavBar = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
-      <Navbar color="light" light expand="md">
-        <Container>
-          <NavbarBrand href="/">Simple Weather</NavbarBrand>
-          <NavbarToggler onClick={toggle} />
-          <Collapse isOpen={isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/">Current Weather</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/">7 Day</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/">14 Day</NavLink>
-              </NavItem>
-            </Nav>
-            <NavbarText>Simple Text</NavbarText>
-          </Collapse>
-        </Container>
-      </Navbar>
-    </div>
+    <nav className="navbar">
+      <a href="/" className="navbar-brand">
+        Simple Weather
+      </a>
+      <ul class="navbar-nav d-none d-md-flex">
+        <li class="nav-item">
+          <a href="#" class="nav-link">Minutely Forecast</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Hourly Forecast</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">7 Day Forecast</a>
+        </li>
+      </ul>
+    </nav>
   );
 }
 
