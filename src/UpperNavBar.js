@@ -1,32 +1,23 @@
-import React, { useState } from 'react';
-import halfmoon from 'halfmoon/js/halfmoon';
+import React from 'react';
 
 const UpperNavBar = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
-
   return (
     <nav className="navbar">
-      <div className="navbar-content">
-        <button className="btn btn-action" type="button" onClick={halfmoon.toggleSidebar()}>
-          <i className="fa fa-bars" aria-hidden="true"></i>
-          <span className="sr-only">Toggle sidebar</span>
-        </button>
-      </div>
-
       <a href="/" className="navbar-brand">
+        <i className="fa fa-bolt" aria-hidden="true"></i>
         Simple Weather
       </a>
-      <ul className="navbar-nav d-none d-md-flex">
-        <li className="nav-item">
-          <a href="#current" className="nav-link">Current Forecast</a>
-        </li>
-        <li className="nav-item">
-          <a href="#hourly" className="nav-link">Hourly Forecast</a>
-        </li>
-        <li className="nav-item">
-          <a href="#daily" className="nav-link">7 Day Forecast</a>
+      <ul className="navbar-nav">
+        <li className="nav-item dropdown with-arrow">
+          <a className="nav-link" data-toggle="dropdown" id="nav-link-dropdown-toggle">
+            Forecasts 
+            <i className="fa fa-angle-down ml-5" aria-hidden="true"></i>
+          </a>
+          <div className="dropdown-menu dropdown-menu-right" aria-labelledby="nav-link-dropdown-toggle">
+            <a href="#current" className="dropdown-item">Current</a>
+            <a href="#hourly" className="dropdown-item">Hourly</a>
+            <a href="#daily" className="dropdown-item">7 Day</a>
+          </div>
         </li>
       </ul>
     </nav>

@@ -1,13 +1,23 @@
 import { useState, useEffect } from "react";
+import axios from 'axios';
+
+const BASE_URL = 'https://us1.locationiq.com/v1/reverse.php';
 
 export const useGetLocation = () => {
-  const [position, setPosition] = useState({ latitude: 0, longitude: 0 });
+  const [position, setPosition] = useState({ lat: 0, lng: 0, address: {} });
   const [error, setError] = useState(null);
 
   const successHandler = ({ coords }) => {
-    setPosition({
-      latitude: coords.latitude,
-      longitude: coords.longitude
+    const cancelToken = axios.CancelToken.source();
+    axios.get(BASE_URL, {
+      cancelToken: cancelToken.token,
+      params: { format: 'json', lat: coords.latitude, lon: coords.longitude, normalizeaddress: 1, key: process.env.REACT_APP_LOCATION_KEY }
+    }).then(res => {
+      setPosition({
+        lat: coords.latitude,
+        lng: coords.longitude,
+        address: res.data.address
+      });
     });
   };
 
@@ -21,7 +31,7 @@ export const useGetLocation = () => {
       return;
     }
 
-    navigator.geolocation.getCurrentPosition(successHandler, errorHandler);
+    navigator.geolocation.getCurrentPosition(successHandler, errorHandler, { enableHighAccuracy: true });
 
     return () => {};
   }, []);

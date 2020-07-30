@@ -15,7 +15,7 @@ function reducer(state, action) {
       return { loading: true, weather: {} };
     case ACTIONS.GET_DATA:
       return { ...state, loading: false, weather: action.payload.weather };
-    case ACTIONS.MAKE_REQUEST:
+    case ACTIONS.ERROR:
       return { ...state, loading: false, error: action.payload.error, weather: {} };
     default:
       return state;
@@ -30,7 +30,7 @@ export const useFetchWeather = (params, position) => {
     dispatch({ type: ACTIONS.MAKE_REQUEST });
     axios.get(BASE_URL, {
       cancelToken: cancelToken.token,
-      params: { units: 'imperial', lat: position.latitude, lon: position.longitude, ...params, appid: process.env.REACT_APP_WEATHER_KEY }
+      params: { units: 'imperial', lat: position.lat, lon: position.lng, ...params, appid: process.env.REACT_APP_WEATHER_KEY }
     }).then(res => {
       dispatch({ type: ACTIONS.GET_DATA, payload: { weather: res.data }});
     }).catch(e => {

@@ -11,8 +11,7 @@ import DailyForecast from './api/DailyForecast';
 
 const App = props => {
   const geoLocation = useGetLocation();
-  const [params, setParams] = useState({ exclude: 'minutely' });
-  
+  const [params, setParams] = useState({ exclude: 'minutely' });  
   const { weather, loading, error } = useFetchWeather(params, geoLocation[0]);
 
   useEffect(() => {
@@ -20,25 +19,34 @@ const App = props => {
     halfmoon.toggleDarkMode();
   }, []);
 
-  let content = <div>
-                  <div className="row">
-                    <div className="col-md-4">
-                      <CurrentForecast current={weather.current} />
-                    </div>
-                    <div className="col-md-8">
-                      <DailyForecast daily={weather.daily} />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <HourlyForecast hourly={weather.hourly} />
-                  </div>
+  let content = <div className="content">
+                  <div className="content-title">Location Services Disabled</div>
+                  <p>Please enable your location services in your browser.</p>
                 </div>;
 
-  if (geoLocation[0].latitude == 0 || geoLocation[1] != null) {
-    content = <div className="content">
-                <div className="content-title">Location Services Disabled</div>
-                <p>Please enable your location services in your browser.</p>
-              </div>
+  if (geoLocation[0].lat !== 0 && geoLocation[1] == null) {
+    content = <div>
+                <div className="row">
+                  <div className="col-12">
+                    <div className="card">
+                      <h1 className="card-title">Weather for {geoLocation[0].address.city}, {geoLocation[0].address.state}</h1>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-lg-4">
+                    <CurrentForecast current={weather.current} />
+                  </div>
+                  <div className="col-lg-8">
+                    <DailyForecast daily={weather.daily} />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-12">
+                    <HourlyForecast hourly={weather.hourly} />
+                  </div>
+                </div>
+              </div>;
   }
 
   if (loading) {
