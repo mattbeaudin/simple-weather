@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import halfmoon from 'halfmoon/js/halfmoon';
+import ReactGA from 'react-ga';
 
 import { useGetLocation } from './api/getLocation';
 import { useFetchWeather } from './api/useFetchWeather';
@@ -17,6 +18,9 @@ const App = props => {
   useEffect(() => {
     halfmoon.onDOMContentLoaded();
     halfmoon.toggleDarkMode();
+    
+    ReactGA.initialize('UA-91187449-5');
+    ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
 
   let content = <div className="content">
