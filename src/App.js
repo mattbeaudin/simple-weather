@@ -12,7 +12,6 @@ import DailyForecast from './api/DailyForecast';
 
 const App = props => {
   const geoLocation = useGetLocation();
-  const [addressStr, setAddressStr] = useState('');
   const [params, setParams] = useState({ exclude: 'minutely' });  
   const { weather, loading, error } = useFetchWeather(params, geoLocation[0]);
 
@@ -22,8 +21,6 @@ const App = props => {
     
     ReactGA.initialize('UA-91187449-5');
     ReactGA.pageview(window.location.pathname + window.location.search);
-    
-    setAddressStr(geoLocation[0].address.city + ', ' + geoLocation[0].address.state);
   }, []);
 
   let content = <div className="content">
@@ -36,8 +33,7 @@ const App = props => {
                 <div className="row">
                   <div className="col-12">
                     <div className="card">
-                      <h1 className="card-title">Weather for <input type="text" className="form-control form-control-lg" placeholder="Large input">{addressStr}</input></h1>
-                      <h1 className="card-title">Weather for {addressStr}</h1>
+                      <h1 className="card-title">Weather for {geoLocation[0].address.city + ', ' + geoLocation[0].address.state}</h1>
                     </div>
                   </div>
                 </div>
