@@ -1,8 +1,8 @@
 {
   "name": "simple-weather",
-  "version": "0.5.0",
+  "version": "1.0.0",
   "private": true,
-  "homepage": "https://mattbeaudin.github.io/simple-weather",
+  "homepage": "https://simple-weather.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
